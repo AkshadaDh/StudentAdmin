@@ -23,5 +23,38 @@ namespace StudentAdminUI.Repositories
             }
             return students;
         }
+
+        public async Task<Student> GetStudentAsync(Guid studentId)
+        {          
+
+            return await context.Student
+                .Include(nameof(Gender)).Include(nameof(Address))
+                .FirstOrDefaultAsync(x => x.Id == studentId);        
+
+        }
+
+        public async Task<bool> Exists(Guid studentId)
+        {
+           return await context.Student.AnyAsync(x => x.Id == studentId);
+        }
+       public async Task<Student> UpdateStudent(Guid studentId, Student request)
+        {
+            var existingstud=await GetStudentAsync(studentId);
+            if (existingstud != null)
+            {
+                existingstud.FName = request.FName;
+                existingstud.LName = request.LName;
+                existingstud.DOB = request.DOB;
+                existingstud.Email = request.Email;
+                existingstud.Mobile = request.Mobile;
+                existingstud.GenderId = request.GenderId;
+                existingstud.Address.CurrentAddress = request.Address.CurrentAddress;
+                existingstud.Address.PostalAddress= request.Address.PostalAddress;
+                
+                await context.SaveChangesAsync();
+                return existingstud;
+            }
+            return null;
+        }
     }
 }
