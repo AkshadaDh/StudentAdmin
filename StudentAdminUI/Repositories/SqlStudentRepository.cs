@@ -56,5 +56,7 @@ namespace StudentAdminUI.Repositories
             }
             return null;
         }
+
+        public async Task<Student> DeleteStudentAsync(Guid studentId, Student request)
     }
 }

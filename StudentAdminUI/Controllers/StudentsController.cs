@@ -53,7 +53,6 @@ namespace StudentAdminUI.Controllers
         {
             if (await studentRepository.Exists(studentId))
             {
-
                 //update details
                 var UpdatedStud = await studentRepository.UpdateStudent(studentId, mapper.Map<DataModels.Student>(request));
                 if (UpdatedStud != null)
@@ -68,5 +67,10 @@ namespace StudentAdminUI.Controllers
             }
             return null;
         }
+
+        [HttpDelete]
+        [Route("[controller]/studentId:guid")]
+        public async Task<IActionResult> DeleteStudentAsync(studentId)
+
     }
 }

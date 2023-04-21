@@ -9,6 +9,9 @@ namespace StudentAdminUI.Repositories
         Task<Student> GetStudentAsync(Guid studentId);
 
         Task<Student> UpdateStudent(Guid studentId,Student request);
+        Task<Student> DeleteStudentAsync(Guid studentId,Student request);
+
+
 
         Task<bool> Exists(Guid studentId);
     }
