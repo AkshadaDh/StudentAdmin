@@ -57,6 +57,26 @@ namespace StudentAdminUI.Repositories
             return null;
         }
 
-        public async Task<Student> DeleteStudentAsync(Guid studentId, Student request)
+        public async Task<Student> DeleteStudent(Guid studentId)
+        {
+            var DeletedStud = await GetStudentAsync(studentId);
+            if(DeletedStud != null)
+            {
+
+                context.Student.Remove(DeletedStud);
+                await context.SaveChangesAsync();
+
+                return DeletedStud;
+            }
+            return null;
+        }
+
+        public async Task<Student> AddStudent(Student request)
+        {
+            var Stud=await context.Student.AddAsync(request);
+                await context.SaveChangesAsync();
+                return Stud.Entity;
+            
+        }
     }
 }
