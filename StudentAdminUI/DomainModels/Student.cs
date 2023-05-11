@@ -5,6 +5,7 @@ namespace StudentAdminUI.DomainModels
     public class Student
     {
         public Guid Id { get; set; }
+        
         public string FName { get; set; }
         public string LName { get; set; }
         public DateTime DOB { get; set; }
